@@ -1,6 +1,7 @@
 package com.dev.agenda.Views
 
 import android.Manifest
+import android.content.Context.LOCATION_SERVICE
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
@@ -13,6 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import com.dev.agenda.GeoUtils.TrackerService
 import com.dev.agenda.R
@@ -23,9 +25,9 @@ import com.google.android.gms.location.*
 
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+ class MainActivity : AppCompatActivity() {
     private val PERMISSIONS_REQUEST = 1
-    private lateinit var googleApiClient: GoogleApiClient
+     lateinit var googleApiClient: GoogleApiClient
     private var fragment: Fragment? = null
 
     internal fun setUpView(name: String) {
@@ -85,9 +87,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun settings() {
 
-        if (googleApiClient == null) {
+        //if (googleApiClient == null) {
             googleApiClient = GoogleApiClient.Builder(applicationContext).addApi(LocationServices.API).build()
-            googleApiClient.connect()
+            this.googleApiClient.connect()
 
             val locationRequest = LocationRequest.create()
             locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -128,7 +130,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             } as ResultCallback<LocationSettingsResult>)
-        }
+       // }
     }
 
     private fun startTrackerService() {
@@ -140,7 +142,7 @@ class MainActivity : AppCompatActivity() {
         val lm = getSystemService(LOCATION_SERVICE) as LocationManager
         if (!lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-            settings()
+//            settings()
 
         }
 

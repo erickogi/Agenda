@@ -49,19 +49,27 @@ class MeetingsAdapter(private val context: Context, private var modelList: List<
         val x = model.meetingModel.startTimeStamp
         val arr = DateTimeUtils.getDateAndTime(x!!)
 
-        if (DateTimeUtils.isToday(Objects.requireNonNull<DateTime>(DateTimeUtils.conver2Date(x)))) {
-            val day = "Today"
-            holder.txtDayTime.text = String.format("%s  %s", day, arr[1])
+        try {
+            if (DateTimeUtils.isToday(Objects.requireNonNull<DateTime>(DateTimeUtils.conver2Date(x)))) {
+                val day = "Today"
+                holder.txtDayTime.text = String.format("%s  %s", day, arr[1])
 
-        } else {
-            holder.txtDayTime.text = TextUtils.makeSectionOfTextBold(arr[0], arr[1])
+            } else {
+                holder.txtDayTime.text = TextUtils.makeSectionOfTextBold(arr[0], arr[1])
+
+            }
+        }catch (e:Exception){
 
         }
         var agendas = 0
-        if (model.agendaModels != null) {
-            agendas = model.agendaModels.size
-        }
+        try {
+            if (model.agendaModels != null) {
+                agendas = model.agendaModels.size
+            }
 
+        }catch (e:Exception){
+
+        }
         holder.txtAgendasCount.text = String.format("Agenda(s)  %s", agendas.toString())
         holder.txtLocationTitle.text = model.meetingModel.location
 

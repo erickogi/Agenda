@@ -18,12 +18,12 @@ abstract class AGDatabase : RoomDatabase() {
 
     companion object {
 
-        private var INSTANCE: AGDatabase? = null
+        private lateinit var INSTANCE: AGDatabase
         fun getDatabase(context: Context): AGDatabase? {
 
-            if (INSTANCE == null) {
+           // if (INSTANCE == null) {
                 synchronized(AGDatabase::class.java) {
-                    if (INSTANCE == null) {
+                    //if (INSTANCE == null) {
                         INSTANCE = Room.databaseBuilder(context.applicationContext,
                                 AGDatabase::class.java, "ag_database")
                                 .fallbackToDestructiveMigration()
@@ -31,9 +31,9 @@ abstract class AGDatabase : RoomDatabase() {
                                 .allowMainThreadQueries()
                                 .build()
 
-                    }
+                   // }
                 }
-            }
+           // }
             return this.INSTANCE
         }
     }

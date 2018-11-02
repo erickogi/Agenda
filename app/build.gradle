@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+apply plugin: 'kotlin-kapt'
+
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -54,6 +56,9 @@ dependencies {
     def room_version = "2.1.0-alpha01"
 
     implementation "androidx.room:room-runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+
+
     annotationProcessor "androidx.room:room-compiler:$room_version" // use kapt for Kotlin
 
    // implementation "androidx.room:room-runtime:2.0.0-alpha1"
@@ -65,4 +70,5 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
 }

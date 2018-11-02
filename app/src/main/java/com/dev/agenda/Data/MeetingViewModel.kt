@@ -9,8 +9,9 @@ import com.dev.agenda.Models.MeetingModel
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 
-class MeetingViewModel(application: Application) : AndroidViewModel(application) {
+ class MeetingViewModel(application: Application) : AndroidViewModel(application) {
     internal var repo: MeetingRepo
+
 
     init {
         repo = MeetingRepo(application)
